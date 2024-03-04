@@ -25,14 +25,14 @@ public class Task {
     @ManyToMany(mappedBy = "tasks")
     private List<User> workers;
 
-    public Task(Integer id, String nome, String description, Instant startDate, Instant finishDate, TaskStatus taskStatus, TaskPriority taskPriority) {
+    public Task(Integer id, String nome, String description, Instant startDate, Instant finishDate, int taskStatus, int taskPriority) {
         this.id = id;
         this.nome = nome;
         this.description = description;
         this.startDate = startDate;
         this.finishDate = finishDate;
-        this.taskStatus = taskStatus;
-        this.taskPriority = taskPriority;
+        this.taskStatus = TaskStatus.valueOf(taskStatus);
+        this.taskPriority = TaskPriority.valueOf(taskPriority);
     }
 
     public Task() {
