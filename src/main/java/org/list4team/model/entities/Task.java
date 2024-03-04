@@ -1,6 +1,7 @@
 package org.list4team.model.entities;
 
 import jakarta.persistence.*;
+import org.list4team.model.entities.Enums.TaskPriority;
 import org.list4team.model.entities.Enums.TaskStatus;
 
 import java.time.Instant;
@@ -13,14 +14,30 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
+    private String nome;
     private String description;
+    @Temporal(TemporalType.DATE)
     private Instant startDate;
+    @Temporal(TemporalType.DATE)
     private Instant finishDate;
     private TaskStatus taskStatus = TaskStatus.CREATED;
+    private TaskPriority taskPriority;
     @ManyToMany(mappedBy = "tasks")
     private List<User> workers;
 
+    public Task(Integer id, String nome, String description, Instant startDate, Instant finishDate, TaskStatus taskStatus, TaskPriority taskPriority) {
+        this.id = id;
+        this.nome = nome;
+        this.description = description;
+        this.startDate = startDate;
+        this.finishDate = finishDate;
+        this.taskStatus = taskStatus;
+        this.taskPriority = taskPriority;
+    }
+
+    public Task() {
+
+    }
 
     public Integer getId() {
         return id;
@@ -30,12 +47,12 @@ public class Task {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNome(String name) {
+        this.nome = name;
     }
 
     public String getDescription() {
@@ -76,6 +93,14 @@ public class Task {
 
     public void setTaskStatus(TaskStatus taskStatus) {
         this.taskStatus = taskStatus;
+    }
+
+    public TaskPriority getTaskPriority() {
+        return taskPriority;
+    }
+
+    public void setTaskPriority(TaskPriority taskPriority) {
+        this.taskPriority = taskPriority;
     }
 
     @Override

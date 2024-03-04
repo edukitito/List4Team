@@ -12,12 +12,24 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
+    private String nome;
     private String cargo;
     private String email;
-    private String token;
+    private String tokem;
     @ManyToMany()
-    private List<Task> tasks = new ArrayList<>();
+    private List<Task> tasks = null;
+
+    public User(Integer id, String nome, String cargo, String email, String tokem) {
+        this.id = id;
+        this.nome = nome;
+        this.cargo = cargo;
+        this.email = email;
+        this.tokem = tokem;
+    }
+
+    public User() {
+
+    }
 
     public Integer getId() {
         return id;
@@ -27,12 +39,12 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNome(String name) {
+        this.nome = name;
     }
 
     public String getCargo() {
@@ -51,12 +63,12 @@ public class User {
         this.email = email;
     }
 
-    public String getToken() {
-        return token;
+    public String getTokem() {
+        return tokem;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setTokem(String token) {
+        this.tokem = token;
     }
 
     @Override
