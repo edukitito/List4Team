@@ -2,9 +2,7 @@ package org.list4team.model.entities;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -17,7 +15,8 @@ public class User {
     private String email;
     private String tokem;
     @ManyToMany()
-    private List<Task> tasks = null;
+    @JoinTable(name = "users_tasks", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "task_id"))
+    private Set<Task> tasks = new HashSet<>();
 
     public User(Integer id, String nome, String cargo, String email, String tokem) {
         this.id = id;
@@ -83,7 +82,7 @@ public class User {
         return Objects.hash(id);
     }
 
-    public List<Task> getTasks() {
+    public Set<Task> getTasks() {
         return tasks;
     }
 

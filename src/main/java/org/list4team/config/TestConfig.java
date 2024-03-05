@@ -27,9 +27,14 @@ public class TestConfig implements CommandLineRunner {
         User user1 = new User(null, "Patricia", "assistente","assistente@gmail.com", "fhudashufhuadsufhashudf");
         User user2 = new User(null, "Helena", "marketing", "marketing@gmail.com", "fsdhafuhsdauhfhwurfhaufhds");
 
-        userRepository.saveAll(Arrays.asList(user,user1,user2));
+       // userRepository.saveAll(Arrays.asList(user,user1,user2));
         Task task = new Task(null, "Desenvolvimento de banner site", "Fazer um banner pro dia das mulheres", Instant.now(), Instant.now().plus(30, ChronoUnit.DAYS), 3,3);
         Task task1 = new Task(null, "Desenvolvimento de banner site1", "Fazer um banner pro dia do consumidor", Instant.now(), Instant.now().plus(7, ChronoUnit.DAYS), 3,1);
         taskRepository.saveAll(Arrays.asList(task1, task));
+
+        user.getTasks().add(task);
+        user1.getTasks().add(task1);
+        user.getTasks().add(task1);
+        userRepository.saveAll(Arrays.asList(user, user1, user2));
     }
 }

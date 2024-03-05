@@ -1,12 +1,15 @@
 package org.list4team.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.list4team.model.entities.Enums.TaskPriority;
 import org.list4team.model.entities.Enums.TaskStatus;
 
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tasks")
@@ -16,14 +19,13 @@ public class Task {
     private Integer id;
     private String nome;
     private String description;
-    @Temporal(TemporalType.DATE)
     private Instant startDate;
-    @Temporal(TemporalType.DATE)
     private Instant finishDate;
     private TaskStatus taskStatus = TaskStatus.CREATED;
     private TaskPriority taskPriority;
     @ManyToMany(mappedBy = "tasks")
-    private List<User> workers;
+    @JsonIgnore
+    private Set<User> workers = new HashSet<>();
 
     public Task(Integer id, String nome, String description, Instant startDate, Instant finishDate, int taskStatus, int taskPriority) {
         this.id = id;
@@ -79,12 +81,12 @@ public class Task {
         this.finishDate = finishDate;
     }
 
-    public List<User> getWorkers() {
+    public Set<User> getWorkers() {
         return workers;
     }
 
-    public void setWorkers(List<User> workers) {
-        this.workers = workers;
+    public void addWorkers(User worker) {
+        workers.add(worker);
     }
 
     public TaskStatus getTaskStatus() {

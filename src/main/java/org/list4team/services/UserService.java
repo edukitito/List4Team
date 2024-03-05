@@ -18,8 +18,4 @@ public class UserService {
         return repository.findAll();
 
     }
-    public User findById(int id){
-        Optional<User> user = repository.findById(id);
-        return user.orElseThrow(() -> new ResourceNotFoundException(id));
-    }
 }
