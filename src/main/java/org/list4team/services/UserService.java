@@ -15,6 +15,8 @@ public class UserService {
 
     @Autowired
     private UserRepository repository;
+
+    private TaskService taskService = new TaskService();
     public List<User> findAll(){
         return repository.findAll();
 
@@ -45,5 +47,12 @@ public class UserService {
         entity.setEmail(user.getEmail());
         entity.setCargo(user.getCargo());
         entity.setTokem(user.getTokem());
+    }
+    public User addTask(int idUser, int idTask){
+        User user = repository.getReferenceById(idUser);
+        Task task = taskService.findById(idTask);
+        user.addtask(task);
+        repository.save(user);
+        return user;
     }
 }
