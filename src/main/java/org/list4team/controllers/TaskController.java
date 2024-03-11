@@ -48,4 +48,11 @@ public class TaskController {
         }
     }
 
+    @PostMapping
+    public ResponseEntity<Task> insert(@RequestBody Task task){
+        service.insert(task);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(task.getId()).toUri();
+        return ResponseEntity.created(uri).body(task);
+    }
+
 }

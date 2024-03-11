@@ -1,9 +1,7 @@
 package org.list4team.controllers;
 
-import org.list4team.model.entities.Task;
 import org.list4team.model.entities.User;
 import org.list4team.services.UserService;
-import org.list4team.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +9,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/users")
