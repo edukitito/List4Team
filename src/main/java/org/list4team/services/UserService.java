@@ -44,7 +44,6 @@ public class UserService {
     private void updateData(User entity, User user){
         entity.setNome(user.getNome());
         entity.setEmail(user.getEmail());
-        entity.setEmail(user.getEmail());
         entity.setCargo(user.getCargo());
         entity.setTokem(user.getTokem());
     }
