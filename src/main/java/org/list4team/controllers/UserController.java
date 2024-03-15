@@ -4,13 +4,15 @@ import org.list4team.model.entities.User;
 import org.list4team.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
 
-@RestController
+@Controller
 @CrossOrigin("*")
 @RequestMapping(value = "/users")
 public class UserController {
@@ -41,6 +43,29 @@ public class UserController {
     public ResponseEntity<Void> delete(@PathVariable int id){
         service.deleteUser(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/login")
+    public String index(Model model){
+        return "login";
+    }
+
+    @PostMapping(value = "/login")
+    public String login(@RequestParam String useremail, @RequestParam String userpassword, Model model){
+        User user = service.findByEmail(useremail);
+        if(user!= null){
+            if(userpassword.equals(user.getTokem())){
+                model.addAttribute("message", "Usuário autenticado");
+                return "login";
+            }else {
+                model.addAttribute("message", "Senha Inválida");
+                return "login";
+            }
+        }else {
+            model.addAttribute("message", "Usuário Não cadastrado");
+            return "login";
+        }
+
     }
 
 

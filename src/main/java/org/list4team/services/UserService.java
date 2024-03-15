@@ -54,4 +54,8 @@ public class UserService {
         repository.save(user);
         return user;
     }
+
+    public User findByEmail(String email){
+        return repository.findUserByEmail(email);
+    }
 }

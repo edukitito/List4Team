@@ -1,11 +1,11 @@
 <!-- login.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="style.css" type="text/css">
-    <script src="viewclass.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="loginScript.js"></script>
 </head>
 <body>
     <div>
@@ -17,7 +17,7 @@
             <input type="password" id="password" name="password" required><br><br>
             <button type="submit">Login</button>
         </form>
-        <p id="message"></p>
+        <p th:text="${message}"></p>
         <div class="signup-link">
             <a href="singup.html">Don't have an account? Sign Up</a>
         </div>
